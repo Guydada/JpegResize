@@ -17,7 +17,7 @@ def resize_folder(output_width=640, output_height=480):
         image = "\\".join([input_path, filename])
         output_image = "\\".join([output_path, filename])
         try:
-            dim_resized = resize_image_2(image, output_image, output_width, output_height)
+            dim_resized = resize_image_crop(image, output_image, output_width, output_height)
             print("Done for: {}, output shape: {}".format(filename, dim_resized))
         except FileExistsError:
             print("Failed for: {} because file already exists. Delete older exports and try again".format(filename))
@@ -30,7 +30,7 @@ def resize_image(input_path, output_path, output_width, output_height):
     cv2.imwrite(output_path, resized)
 
 
-def resize_image_2(input_path, output_path, output_width, output_height):
+def resize_image_crop(input_path, output_path, output_width, output_height):
     image = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
     (h, w) = image.shape[:2]
     r = output_height / float(h)
