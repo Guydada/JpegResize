@@ -19,8 +19,8 @@ def resize_folder(output_width=640, output_height=480):
         try:
             dim_resized = resize_image_crop(image, output_image, output_width, output_height)
             print("Done for: {}, output shape: {}".format(filename, dim_resized))
-        except FileExistsError:
-            print("Failed for: {} because file already exists. Delete older exports and try again".format(filename))
+        except:
+            print("Failed for: {}".format(filename))
 
 
 def resize_image(input_path, output_path, output_width, output_height):
