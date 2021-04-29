@@ -23,12 +23,16 @@ def resize_folder(output_width=640, output_height=480):
             print("Failed for: {}".format(filename))
 
 
+# Simple resizing
+
+
 def resize_image(input_path, output_path, output_width, output_height):
     image = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
     output_dim = (output_width, output_height)
     resized = cv2.resize(image, output_dim, interpolation=cv2.INTER_AREA)
     cv2.imwrite(output_path, resized)
 
+# Resizing with crop to fit 640X480 size arbitrary width crop (fits origin images of shape: (1280, 720)
 
 def resize_image_crop(input_path, output_path, output_width, output_height):
     image = cv2.imread(input_path, cv2.IMREAD_UNCHANGED)
@@ -36,7 +40,7 @@ def resize_image_crop(input_path, output_path, output_width, output_height):
     r = output_height / float(h)
     dim = (int(w * r), output_height)
     resized = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
-    resized = resized[:,107:747]
+    resized = resized[:, 107:747]
     cv2.imwrite(output_path, resized)
     dim_resized = resized.shape[:2]
     return dim_resized
